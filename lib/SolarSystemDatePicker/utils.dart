@@ -12,12 +12,14 @@ double dateTimeToAngle(DateTime _dt) {
   int days = _dt.difference(DateTime(_dt.year)).inDays;
 
   return days /
-      (365 +
-          ((_dt.year % 400 == 0 || (_dt.year % 4 == 0 && _dt.year % 100 != 0))
-              ? 1
-              : 0)) *
-      math.pi *
-      2;
+          (365 +
+              ((_dt.year % 400 == 0 ||
+                      (_dt.year % 4 == 0 && _dt.year % 100 != 0))
+                  ? 1
+                  : 0)) *
+          math.pi *
+          2 +
+      math.pi;
 }
 
 DateTime angleToDateTime(double angle, int year) {
