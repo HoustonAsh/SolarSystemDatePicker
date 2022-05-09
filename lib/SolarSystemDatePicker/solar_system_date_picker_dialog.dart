@@ -26,41 +26,47 @@ class _SolarSystemDatePickerDialogState
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      child: Container(
-        color: Colors.black,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width * 0.8,
-                height: 252,
-                child: SolarSystemDatePicker(
-                  onChanged: (v) {
-                    setState(() {
-                      picked = v;
-                    });
-                  },
-                  constraints: BoxConstraints(
-                    maxHeight: 252,
-                    maxWidth: MediaQuery.of(context).size.width * 0.8,
+      backgroundColor: Colors.transparent,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(10),
+        child: Container(
+          color: Colors.black,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.8,
+                  height: 252,
+                  child: SolarSystemDatePicker(
+                    onChanged: (v) {
+                      setState(() {
+                        picked = v;
+                      });
+                    },
+                    constraints: BoxConstraints(
+                      maxHeight: 252,
+                      maxWidth: MediaQuery.of(context).size.width * 0.8,
+                    ),
                   ),
                 ),
               ),
-            ),
-            Text(
-              DateFormat.yMMMd().format(picked).toString(),
-              style: const TextStyle(color: Colors.white),
-            ),
-            ElevatedButton(
+              Text(
+                DateFormat('dd.MM.yyyy').format(picked).toString(),
+                style: const TextStyle(color: Colors.white),
+              ),
+              ElevatedButton(
                 onPressed: () {
                   if (widget.onConfirm != null) {
                     widget.onConfirm!(picked);
                   }
+                  Navigator.pop(context);
                 },
-                child: const Text('ok'))
-          ],
+                child: const Text('ok'),
+              )
+            ],
+          ),
         ),
       ),
     );

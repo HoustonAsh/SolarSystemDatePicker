@@ -6,9 +6,10 @@ import 'solar_system_painter.dart';
 
 class SolarSystemDatePicker extends StatefulWidget {
   final void Function(DateTime)? onChanged;
+  final DateTime? initialDate;
   final BoxConstraints constraints;
   const SolarSystemDatePicker(
-      {Key? key, this.onChanged, required this.constraints})
+      {Key? key, this.onChanged, required this.constraints, this.initialDate})
       : super(key: key);
 
   @override
@@ -24,7 +25,7 @@ class _SolarSystemDatePickerState extends State<SolarSystemDatePicker> {
   @override
   void initState() {
     super.initState();
-    dt = DateTime(2022, 6);
+    dt = widget.initialDate ?? DateTime.now();
     angle = dateTimeToAngle(dt);
     _painter = SolarSystemPainter(
         color: Colors.blue, constraints: widget.constraints, earthAngle: angle);
@@ -77,7 +78,6 @@ class _SolarSystemDatePickerState extends State<SolarSystemDatePicker> {
     });
 
     if (widget.onChanged != null) {
-      print(angleToDateTime(angle, dt.year));
       widget.onChanged!(angleToDateTime(angle, dt.year));
     }
   }

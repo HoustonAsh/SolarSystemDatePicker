@@ -32,5 +32,5 @@ DateTime angleToDateTime(double angle, int year) {
       .round()
       .toInt();
 
-  return ans.add(Duration(days: days));
+  return ans.add(Duration(days: days + (365 / 2).ceil()));
 }
